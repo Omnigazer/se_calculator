@@ -6,7 +6,7 @@ class Cruiser < Ship
       attack: 4,
       defense: 1,
       hull: 2,
-      initiative: 5
+      initiative: 3
     )
   end
 end

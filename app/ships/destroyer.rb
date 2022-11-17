@@ -6,7 +6,7 @@ class Destroyer < Ship
       attack: 4,
       defense: 0,
       hull: 1,
-      initiative: 5
+      initiative: 4
     )
   end
 end
