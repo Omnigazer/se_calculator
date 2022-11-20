@@ -2,10 +2,13 @@
 
 class Ship
   include ActiveModel::Model
-  attr_accessor :attack, :defense, :hull, :initiative, :fleet, :damage
+  attr_accessor :attack, :defense, :hull, :initiative, :fleet, :damage, 
+                :attacks, :immune_to_bonus
 
   def initialize(attributes = {})
     @damage = 0
+    @attacks = 1
+    @immune_to_bonus = false
     super(attributes)
   end
 
@@ -28,11 +31,13 @@ class Ship
     return if ship.nil? || ship.destroyed?
 
     result = roll
-    ship.take_hit if result <= attack - ship.defense || result == 1
+    check = attack - ship.defense
+    check += 1 if fleet.bonus && !ship.immune_to_bonus
+    ship.take_hit if result <= check || result == 1
   end
 
   def attack
-    @attack + fleet.attack + (fleet.bonus ? 1 : 0)
+    @attack + fleet.attack
   end
 
   def defense

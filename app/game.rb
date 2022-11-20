@@ -13,11 +13,15 @@ class Game
 
       (1..5).each do |initiative|
         a.take_ships(initiative).each do |ship|
-          ship.fire(a.target(b))
+          ship.attacks.times do
+            ship.fire(a.target(b))
+          end          
         end
 
         b.take_ships(initiative).each do |ship|
-          ship.fire(b.target(a))
+          ship.attacks.times do
+            ship.fire(b.target(a))
+          end          
         end
       end
     end
