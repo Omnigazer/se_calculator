@@ -6,6 +6,8 @@ require 'active_model'
 require 'active_support/all'
 %w[app].each { |dir| require_all(dir) }
 
+include ActiveSupport::NumberHelper
+
 def generate_fleets
   fleet1 = Fleet.new(defense: 1, strat: StrongestThinShip)
   fleet1.add_ships(Cruiser * 4)
@@ -29,5 +31,7 @@ N.times do
   victories += 1 if res[:victory]
   survivors += res[:survivors]
 end
-p 100 * (victories.to_f / N)
-p survivors.to_f / N
+p "========================="
+p "Change of victory: #{number_to_percentage(100 * (victories.to_f / N), precision: 1)}"
+p "Average survivor: #{'%.2f' % (survivors.to_f / N)}"
+p "========================="
