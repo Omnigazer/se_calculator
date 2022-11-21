@@ -18,10 +18,6 @@ class Ship
     end
   end
 
-  def self.*(n)
-    create(n)
-  end
-
   def take_hit
     self.damage += 1
     destroy if damage >= hull
@@ -37,11 +33,19 @@ class Ship
   end
 
   def attack
-    @attack + fleet.attack
+    @attack + attack_upgrade
   end
 
   def defense
-    @defense + fleet.defense
+    @defense + defense_upgrade
+  end
+
+  def attack_upgrade
+    [fleet.attack, hull].min
+  end
+
+  def defense_upgrade
+    [fleet.defense, hull].min
   end
 
   def destroy
