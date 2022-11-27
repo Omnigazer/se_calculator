@@ -3,13 +3,14 @@
 class Fleet
   include ActiveModel::Model
 
-  attr_accessor :ships, :attack, :defense, :tactics, :bonus, :strat
+  attr_accessor :ships, :attack, :defense, :fighters, :tactics, :bonus, :strat
   attr_accessor :nebula, :asteroids
 
   def initialize(attributes = {})
     @ships = []
     @attack ||= 0
     @defense ||= 0
+    @fighters = 0
     @tactics ||= 0
     @nebula = false
     @asteroids = false
