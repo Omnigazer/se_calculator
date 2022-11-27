@@ -18,6 +18,10 @@ class Ship
     end
   end
 
+  def self.*(n)
+    create(n)
+  end
+
   def take_hit
     self.damage += 1
     destroy if damage >= hull
@@ -41,11 +45,21 @@ class Ship
   end
 
   def attack_upgrade
+    return 0 if fleet.asteroids
+
     [fleet.attack, hull].min
   end
 
   def defense_upgrade
+    return 0 if fleet.nebula
+
     [fleet.defense, hull].min
+  end
+
+  def initiative
+    return 5 if fleet.asteroids || fleet.nebula
+
+    @initiative
   end
 
   def destroy
